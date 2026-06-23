@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const authRoutes = require("./routes/authRoutes");
+
 require("dotenv").config();
 
 const app = express();
@@ -26,4 +28,4 @@ app.listen(PORT, () => {
 
 const recipeRoutes = require("./routes/recipeRoutes");
 
-app.use("/api/recipes", recipeRoutes);
+app.use('/api/auth', authRoutes);
