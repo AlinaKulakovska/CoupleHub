@@ -11,22 +11,18 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [partnerId, setPartnerId] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // later this comes from backend
-    const fakeToken = "123456";
-
-   try {
-            // Pass ALL state variables to your context function
-            await register(email, password, name, startDate);
-            navigate("/");
-        } catch (err) {
-            console.error("Registration failed", err);
-        }
-
-    navigate("/");
+    try {
+      // Pass ALL state variables to your context function
+      await register(email, password, name, startDate, partnerId);
+      navigate("/");
+    } catch (err) {
+      console.error("Registration failed", err);
+    }
   }
 
   return (
@@ -62,14 +58,26 @@ export default function Register() {
           placeholder="Start of relationship"
           onChange={(e) => setStartDate(e.target.value)}
         />
+        <p className="text-pink-500">
+          Enter your partner's unique Hub ID (optional):
+        </p>
+        <input
+          type="text"
+          className="border w-full p-3 rounded-xl"
+          placeholder="Partner's Hub ID"
+          onChange={(e) => setPartnerId(e.target.value)}
+        />
 
         <button className="bg-pink-500 text-white w-full p-3 rounded-xl">
           Register
         </button>
         <p className="text-gray-600">
-          Already have an account?    {'  '}
-          <button className=" text-pink-500 hover:text-pink-700" onClick={() => navigate("/login")}>
-             Login
+          Already have an account? {"  "}
+          <button
+            className=" text-pink-500 hover:text-pink-700"
+            onClick={() => navigate("/login")}
+          >
+            Login
           </button>
         </p>
       </form>

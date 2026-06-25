@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const TimeElapsedWidget = () => {
-  // Hardcoded past date (e.g., June 15, 2020)
-  const pastDate = new Date('2025-11-21T00:00:00');
+  const { user } = useContext(AuthContext);
+  const [timeElapsed, setTimeElapsed] = useState("");
+  const coupleData = user?.couple;
+  const anniversary = coupleData?.anniversaryDate;
 
-  const [timeElapsed, setTimeElapsed] = useState('');
+    const pastDate = new Date(anniversary);
 
   useEffect(() => {
     const calculateElapsed = () => {
       const now = new Date();
-      
+
       let years = now.getFullYear() - pastDate.getFullYear();
       let months = now.getMonth() - pastDate.getMonth();
       let days = now.getDate() - pastDate.getDate();
@@ -29,11 +33,11 @@ const TimeElapsedWidget = () => {
       }
 
       // Pluralization helpers
-      const yText = `${years} ${years === 1 ? 'year' : 'years'}`;
-      const mText = `${months} ${months === 1 ? 'month' : 'months'}`;
-      const dText = `${days} ${days === 1 ? 'day' : 'days'}`;
+      const yText = `${years} ${years === 1 ? "year" : "years"}`;
+      const mText = `${months} ${months === 1 ? "month" : "months"}`;
+      const dText = `${days} ${days === 1 ? "day" : "days"}`;
 
-      setTimeElapsed(`${yText}, ${mText}, and ${dText}`);
+      setTimeElapsed(`${yText}, ${mText} and ${dText}`);
     };
 
     // Calculate immediately on mount

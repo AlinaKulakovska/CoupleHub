@@ -13,10 +13,22 @@ import {
   Camera,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 
 
 export default function Sidebar() {
+  
+  const { user } = useContext(AuthContext);  // Extract IDs safely whether they are full objects or raw string values
+   const coupleData = user?.couple
+  const user1Id = coupleData?.user1?._id || coupleData?.user1;
+  const user2Id = coupleData?.user2?._id || coupleData?.user2;
+  const loggedInUserId = user?.id || user?._id;
+
+  // Cast everything explicitly to strings to avoid Mongoose ObjectId comparison bugs
+  const isUser1 = String(loggedInUserId) === String(user1Id);
+  const partnerObj = isUser1 ? coupleData?.user2 : coupleData?.user1;
 
 function NavItem({ icon, label, to }) {
   return (
@@ -46,7 +58,7 @@ function NavItem({ icon, label, to }) {
         </div>
         <div>
           <h1 className="font-bold text-lg">CoupleHub</h1>
-          <p className="text-xs text-gray-500">Janik & Alina ✨</p>
+          <p className="text-xs text-gray-500">   {user?.name || "User"} & {partnerObj?.name || "Waiting for partner..."} ✨</p>
         </div>
       </div>
 

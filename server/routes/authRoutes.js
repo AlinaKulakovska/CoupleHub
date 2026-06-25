@@ -1,13 +1,15 @@
 const express = require("express");
-const router = express.Router(); // 👉 This creates the missing 'router' variable
+const router = express.Router(); 
 
-// Import your register controller (make sure this path correctly points to your controller file)
+// Import your controllers
 const registerController = require("../controllers/RegisterController"); 
-const loginController = require("../controllers/LoginController"); // Import your login controller
+const loginController = require("../controllers/LoginController"); 
 
-// Your route definition now works perfectly
+// Route definitions
 router.post('/register', registerController.register);
 router.post('/login', loginController.login);
 
-// 👉 Don't forget to export it so server.js can read it!
+// 👉 ADD THIS: Route for checking if the partner has joined yet
+router.post('/check-status', loginController.checkStatus);
+
 module.exports = router;

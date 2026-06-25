@@ -33,25 +33,21 @@ function App() {
 
       <div className="flex-1 p-8">
         <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/meals" element={<Meals />} />
-          <Route path="/dates" element={<Dates />} />
-          <Route path="/truth-dare" element={<TruthDare />} />
-          <Route path="/memories" element={<Memories />} />
-          <Route path="/bucket-list" element={<BucketList />} />
-          <Route path="/challenges" element={<Challenges />} />
-          <Route path="/mood" element={<Mood />} />
-          <Route path="/to-do-list" element={<ToDoList />} />
-          <Route path="/budget-tracker" element={<Budgettracker />} />
+
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/>
+          <Route path="/meals" element={<ProtectedRoute><Meals /></ProtectedRoute>} />
+          <Route path="/dates" element={<ProtectedRoute><Dates /></ProtectedRoute>} />
+          <Route path="/truth-dare" element={<ProtectedRoute><TruthDare /></ProtectedRoute>} />
+          <Route path="/questions" element={<ProtectedRoute><Questions /></ProtectedRoute>} />
+          <Route path="/memories" element={<ProtectedRoute><Memories /></ProtectedRoute>} />
+          <Route path="/bucket-list" element={<ProtectedRoute><BucketList /></ProtectedRoute>} />
+          <Route path="/challenges" element={<ProtectedRoute><Challenges /></ProtectedRoute>} />
+          <Route path="/mood" element={<ProtectedRoute><Mood /></ProtectedRoute>} />
+          <Route path="/to-do-list" element={<ProtectedRoute><ToDoList /></ProtectedRoute>} />
+          <Route path="/budget-tracker" element={<ProtectedRoute><Budgettracker /></ProtectedRoute>} />
         </Routes>
       </div>
     </div>

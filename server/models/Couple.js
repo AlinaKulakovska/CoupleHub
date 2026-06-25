@@ -1,19 +1,21 @@
+// models/Couple.js
 const mongoose = require("mongoose");
 
 const coupleSchema = new mongoose.Schema({
-
     user1: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     },
-
     user2: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        default: null // Will be null until the second partner joins
     },
-
-    anniversaryDate: Date
-
-});
+    anniversaryDate: {
+        type: Date,
+        required: true
+    }
+}, { timestamps: true }); // Automatically adds createdAt and updatedAt tracking
 
 module.exports = mongoose.model("Couple", coupleSchema);
