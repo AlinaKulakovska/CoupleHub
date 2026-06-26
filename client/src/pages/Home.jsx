@@ -58,7 +58,7 @@ const { user, logout, setUser} = useContext(AuthContext);
     return () => clearInterval(interval); // Clean up on unmount
   }, [isConnectedWithPartner, user, loggedInUserId, setUser]);
   return (
-    <div className="flex w-full min-h-screen bg-gray-50">
+    <div className="flex w-full min-h-screen">
       
       {/* ❌ NOT CONNECTED YET: Show the onboarding block with the Copy ID box */}
       {!isConnectedWithPartner ? (
@@ -129,7 +129,7 @@ const { user, logout, setUser} = useContext(AuthContext);
               would it be?
             </p>
             <p className="text-pink-500 mt-2 text-sm cursor-pointer">
-              Answer together →
+              <NavLink to="/questions">Answer together →</NavLink>
             </p>
           </div>
           <p className="text-gray-600 italic">partners mood???</p>
