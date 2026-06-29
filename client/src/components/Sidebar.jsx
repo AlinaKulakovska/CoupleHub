@@ -91,7 +91,7 @@ function NavItem({ icon, label, to }) {
           to="/challenges"
         />
 
-        <NavItem icon={<Smile size={18} />} label="Mood" to="/mood" />
+        <NavItem icon={<Smile size={18} />} label="Mood Tracker" to="/mood-tracker" />
         <NavItem icon={<List size={18} />} label="To-Do List" to="/to-do-list" />
         <NavItem icon={<DollarSign size={18} />} label="Budget Tracker" to="/budget-tracker" />
       </nav>

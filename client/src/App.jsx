@@ -12,7 +12,7 @@ import Questions from "./pages/Questions";
 import Memories from "./pages/Memories";
 import BucketList from "./pages/BucketList";
 import Challenges from "./pages/Challenges";
-import Mood from "./pages/Mood";
+import MoodTracker from "./pages/MoodTracker";
 import ToDoList from "./pages/ToDoList";
 import Budgettracker from "./pages/Budgettracker";
 import Login from "./pages/Login";
@@ -45,7 +45,7 @@ function App() {
           <Route path="/memories" element={<ProtectedRoute><Memories /></ProtectedRoute>} />
           <Route path="/bucket-list" element={<ProtectedRoute><BucketList /></ProtectedRoute>} />
           <Route path="/challenges" element={<ProtectedRoute><Challenges /></ProtectedRoute>} />
-          <Route path="/mood" element={<ProtectedRoute><Mood /></ProtectedRoute>} />
+          <Route path="/mood-tracker" element={<ProtectedRoute><MoodTracker /></ProtectedRoute>} />
           <Route path="/to-do-list" element={<ProtectedRoute><ToDoList /></ProtectedRoute>} />
           <Route path="/budget-tracker" element={<ProtectedRoute><Budgettracker /></ProtectedRoute>} />
         </Routes>

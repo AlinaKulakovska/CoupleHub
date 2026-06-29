@@ -3,6 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const bucketListRoutes = require("./routes/bucketListRoutes");
+const moodRoutes = require("./routes/MoodRoutes");
+const expenseRoutes = require("./routes/expenseRouutes");
+const taskRoutes = require("./routes/taskRoutes");
 const recipeRoutes = require("./routes/recipeRoutes"); // Moved up with other imports
 
 require("dotenv").config();
@@ -19,6 +22,9 @@ app.use(express.json()); // Parses incoming json requests so req.body works!
 // 2. MOUNT ROUTERS (MUST GO AFTER GLOBAL MIDDLEWARES)
 app.use("/api/bucket-list", bucketListRoutes);
 app.use('/api/auth', authRoutes);
+app.use("/api/moods", moodRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/expenses", expenseRoutes);
 // app.use('/api/recipes', recipeRoutes); // Mount your recipe routes here if needed
 
 // Test route
