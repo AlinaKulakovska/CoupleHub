@@ -6,6 +6,9 @@ const bucketListRoutes = require("./routes/bucketListRoutes");
 const moodRoutes = require("./routes/MoodRoutes");
 const expenseRoutes = require("./routes/expenseRouutes");
 const taskRoutes = require("./routes/taskRoutes");
+const challengeRoutes = require("./routes/ChallengeRoutes");
+const memoryRoutes = require("./routes/memoryRoutes"); // Import memory routes
+const truthDareRoutes = require("./routes/truthDareRoutes"); // Import truth/dare routes
 const recipeRoutes = require("./routes/recipeRoutes"); // Moved up with other imports
 
 require("dotenv").config();
@@ -25,6 +28,9 @@ app.use('/api/auth', authRoutes);
 app.use("/api/moods", moodRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/memories", memoryRoutes);
+app.use("/api/truth-dare", truthDareRoutes);
+app.use("/api/challenges", challengeRoutes);
 // app.use('/api/recipes', recipeRoutes); // Mount your recipe routes here if needed
 
 // Test route
