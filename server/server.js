@@ -31,7 +31,7 @@ app.use("/api/expenses", expenseRoutes);
 app.use("/api/memories", memoryRoutes);
 app.use("/api/truth-dare", truthDareRoutes);
 app.use("/api/challenges", challengeRoutes);
-// app.use('/api/recipes', recipeRoutes); // Mount your recipe routes here if needed
+app.use("/api/meals", recipeRoutes); // Mount your recipe routes here if needed
 
 // Test route
 app.get("/", (req, res) => {
