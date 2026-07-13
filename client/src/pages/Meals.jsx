@@ -141,7 +141,7 @@ const copyAndGoToBring = (recipe) => {
             </div>
             <div>
               <label className="text-[10px] font-bold uppercase text-gray-400 block mb-1">Ingredients (One per line)</label>
-              <textarea rows="6" value={ingredientsInput} onChange={(e) => setIngredientsInput(e.target.value)} className="w-full bg-gray-50 border border-gray-100 rounded-xl px-3 py-2 text-xs outline-hidden text-gray-700 font-mono resize-none h-[142px]" required />
+              <textarea rows="6" value={ingredientsInput} onChange={(e) => setIngredientsInput(e.target.value)} className="w-full bg-gray-50 border border-gray-100 rounded-xl px-3 py-2 text-xs outline-hidden text-gray-700 font-mono resize-none h-35.5" required />
             </div>
           </div>
           <button type="submit" className="w-full py-2.5 bg-[#B06A82] text-white rounded-xl text-xs font-bold hover:bg-[#96556C] transition shadow-xs">Save to Database Board</button>

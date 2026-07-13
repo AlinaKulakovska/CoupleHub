@@ -111,7 +111,7 @@ export default function Dates() {
 
       {/* 2. Main Swiper Card Box View Canvas Frame */}
       {loading ? (
-        <div className="bg-white rounded-3xl min-h-[400px] border border-gray-100 shadow-xs flex flex-col items-center justify-center p-8 text-center space-y-3">
+        <div className="bg-white rounded-3xl min-h-100 border border-gray-100 shadow-xs flex flex-col items-center justify-center p-8 text-center space-y-3">
           <span className="text-4xl animate-spin block">🌸</span>
           <p className="text-xs text-gray-400 font-medium tracking-widest uppercase">Streaming live activity ideas...</p>
         </div>
