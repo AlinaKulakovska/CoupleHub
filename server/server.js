@@ -10,6 +10,7 @@ const challengeRoutes = require("./routes/ChallengeRoutes");
 const memoryRoutes = require("./routes/memoryRoutes"); // Import memory routes
 const truthDareRoutes = require("./routes/truthDareRoutes"); // Import truth/dare routes
 const recipeRoutes = require("./routes/recipeRoutes"); // Moved up with other imports
+const questionRoutes = require("./routes/questionRoutes");
 
 require("dotenv").config();
 
@@ -32,6 +33,7 @@ app.use("/api/memories", memoryRoutes);
 app.use("/api/truth-dare", truthDareRoutes);
 app.use("/api/challenges", challengeRoutes);
 app.use("/api/meals", recipeRoutes); // Mount your recipe routes here if needed
+app.use("/api/questions", questionRoutes);
 
 // Test route
 app.get("/", (req, res) => {

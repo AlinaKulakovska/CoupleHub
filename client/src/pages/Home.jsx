@@ -9,7 +9,10 @@ import { AuthContext } from "../context/AuthContext";
 export default function Home() {
   const { user, logout, setUser } = useContext(AuthContext);
   const [partnerMood, setPartnerMood] = useState(null);
-  // 1. Point directly to user.couple (matching our Step 1 update)
+  const [todayQuestion, setTodayQuestion] = useState("");
+  const [loadingQuestion, setLoadingQuestion] = useState(true);
+
+  // 1. Point directly to user.couple
   const coupleData = user?.couple;
 
   // 2. Extract the IDs whether they are deeply populated objects OR raw string IDs
@@ -17,12 +20,25 @@ export default function Home() {
   const user2Id = coupleData?.user2?._id || coupleData?.user2;
   const loggedInUserId = user?.id || user?._id;
   const coupleId = user?.couple?._id || user?.couple;
+
   // 3. Determine who the partner is
-  // If the logged-in user is user1, then the partner is user2 (and vice versa)
   const isUser1 = loggedInUserId === user1Id;
   const partnerObj = isUser1 ? coupleData?.user2 : coupleData?.user1;
 
-// 👉 2. FETCH STATUS UPON DASHBOARD UNLOCK
+  // 👉 FETCH TODAY'S QUESTION FROM BACKEND
+  useEffect(() => {
+    fetch("http://localhost:5000/api/questions/today")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.question) {
+          setTodayQuestion(data.question);
+        }
+      })
+      .catch((err) => console.error("Error loading question of the day:", err))
+      .finally(() => setLoadingQuestion(false));
+  }, []);
+
+  // 👉 FETCH STATUS UPON DASHBOARD UNLOCK
   useEffect(() => {
     if (coupleId) {
       fetch(`http://localhost:5000/api/moods/${coupleId}`)
@@ -39,9 +55,9 @@ export default function Home() {
 
   // 4. Verification flag: Does user2 exist in the couple document?
   const isConnectedWithPartner = !!user2Id;
+
   // 👉 AUTOMATIC POLLING COUPLING CHECK
   useEffect(() => {
-    // If we are already connected, don't check anymore!
     if (isConnectedWithPartner || !user?.token) return;
 
     const checkPartnerStatus = async () => {
@@ -60,24 +76,23 @@ export default function Home() {
 
         const data = await response.json();
 
-        // If the backend says user2 has arrived!
         if (response.ok && data.couple?.user2) {
           const updatedUser = { ...user, couple: data.couple };
           localStorage.setItem("user", JSON.stringify(updatedUser));
-          setUser(updatedUser); // This triggers an immediate reactive re-render!
+          setUser(updatedUser);
         }
       } catch (err) {
         console.error("Error polling connection status", err);
       }
     };
 
-    // Check every 5 seconds
     const interval = setInterval(checkPartnerStatus, 5000);
-    return () => clearInterval(interval); // Clean up on unmount
+    return () => clearInterval(interval);
   }, [isConnectedWithPartner, user, loggedInUserId, setUser]);
+
   return (
     <div className="flex w-full min-h-screen">
-      {/* ❌ NOT CONNECTED YET: Show the onboarding block with the Copy ID box */}
+      {/* ❌ NOT CONNECTED YET */}
       {!isConnectedWithPartner ? (
         <div className="p-6 bg-pink-50 rounded-3xl max-w-xl mx-auto mt-10 shadow-md h-fit">
           <h1 className="text-3xl font-bold text-pink-600 mb-4">
@@ -93,7 +108,6 @@ export default function Home() {
               partner so they can link accounts with you during registration:
             </p>
 
-            {/* Displays the unique MongoDB _id */}
             <div className="flex items-center justify-between bg-gray-100 p-3 rounded-xl border font-mono text-sm select-all">
               <span>{user?.id || user?._id}</span>
               <button
@@ -119,10 +133,10 @@ export default function Home() {
           </button>
         </div>
       ) : (
-        /* CONNECTED: Hide onboarding and reveal your full interactive dashboard */
+        /* CONNECTED DASHBOARD */
         <div className="flex-1 p-8 space-y-6">
-          {/* Header */}
           <Header />
+
           {/* Stats */}
           <div className="flex gap-4">
             <div className="bg-white rounded-2xl shadow-sm p-6 text-center flex-1">
@@ -139,20 +153,28 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Daily Question */}
+          {/* Dynamic Daily Question Widget */}
           <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <p className="text-pink-500 text-sm uppercase">
+            <p className="text-pink-500 text-sm uppercase font-bold tracking-wider">
               Today's Deep Question
             </p>
-            <p className="text-lg font-medium mt-2">
-              If you could give your younger self one piece of advice, what
-              would it be?
-            </p>
-            <p className="text-pink-500 mt-2 text-sm cursor-pointer">
+            
+            {loadingQuestion ? (
+              <p className="text-gray-400 text-sm mt-2 italic animate-pulse">
+                Loading today's question...
+              </p>
+            ) : (
+              <p className="text-lg font-medium mt-2 text-gray-800">
+                {todayQuestion || "What does love look like to you on an ordinary Tuesday?"}
+              </p>
+            )}
+
+            <p className="text-pink-500 mt-3 text-sm font-semibold hover:underline">
               <NavLink to="/questions">Answer together →</NavLink>
             </p>
           </div>
-         {/* 👉 3. REPLACE REPLACED TEXT ELEMENT WITH RENDER WIDGET BLOCK */}
+
+          {/* Partner Status */}
           <div className="bg-white rounded-2xl p-6 shadow-sm flex items-center justify-between border border-gray-100/50">
             <div>
               <p className="text-pink-500 text-xs font-bold uppercase tracking-wider">Partner Status</p>
