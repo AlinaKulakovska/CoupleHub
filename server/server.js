@@ -17,7 +17,6 @@ require("dotenv").config();
 const app = express();
 
 // 1. GLOBAL MIDDLEWARES (MUST GO FIRST)
-const cors = require("cors");
 app.use(
   cors({
     origin: [
