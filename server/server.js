@@ -17,10 +17,17 @@ require("dotenv").config();
 const app = express();
 
 // 1. GLOBAL MIDDLEWARES (MUST GO FIRST)
-app.use(cors({
-    origin: "http://localhost:5173", // Allow requests from your React dev server
-    credentials: true
-}));
+const cors = require("cors");
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://couplehub.vercel.app"
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json()); // Parses incoming json requests so req.body works!
 
 // 2. MOUNT ROUTERS (MUST GO AFTER GLOBAL MIDDLEWARES)

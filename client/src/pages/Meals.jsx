@@ -15,7 +15,7 @@ export default function MealsAndGroceries() {
   const [image, setImage] = useState("");
 
   // API Base Endpoint Configuration
-  const API_URL = "http://localhost:5000/api/meals";
+  const API_URL = "https://couplehub-gzl5.onrender.com/api/meals";
 
   // Fetch data live from backend database on mount
   useEffect(() => {

@@ -25,7 +25,7 @@ export default function Memories() {
 
   useEffect(() => {
     if (coupleId) {
-      fetch(`http://localhost:5000/api/memories/${coupleId}`)
+      fetch(`https://couplehub-gzl5.onrender.com/api/memories/${coupleId}`)
         .then((res) => res.json())
         .then((data) => setMemories(Array.isArray(data) ? data : []))
         .catch((err) => console.error(err));
@@ -49,7 +49,7 @@ export default function Memories() {
     if (!title.trim() || !description.trim() || !date) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/memories/add", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/memories/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

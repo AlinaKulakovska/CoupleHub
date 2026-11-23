@@ -20,7 +20,7 @@ export default function MoodTracker() {
 
   useEffect(() => {
     if (!coupleId) return;
-    fetch(`http://localhost:5000/api/moods/${coupleId}`)
+    fetch(`https://couplehub-gzl5.onrender.com/api/moods/${coupleId}`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -35,7 +35,7 @@ export default function MoodTracker() {
 
   const handleSelectMood = async (option) => {
     try {
-      const response = await fetch("http://localhost:5000/api/moods/set", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/moods/set", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

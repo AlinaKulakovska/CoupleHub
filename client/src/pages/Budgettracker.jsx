@@ -34,7 +34,7 @@ export default function BudgetTracker() {
 
   useEffect(() => {
     if (coupleId) {
-      fetch(`http://localhost:5000/api/expenses/${coupleId}`)
+      fetch(`https://couplehub-gzl5.onrender.com/api/expenses/${coupleId}`)
         .then((res) => res.json())
         .then((data) => setExpenses(Array.isArray(data) ? data : []))
         .catch((err) => console.error(err));
@@ -46,7 +46,7 @@ export default function BudgetTracker() {
     if (!title.trim() || !amount) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/expenses/add", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/expenses/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

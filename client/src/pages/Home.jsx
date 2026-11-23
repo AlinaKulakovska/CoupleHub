@@ -27,7 +27,7 @@ export default function Home() {
 
   // 👉 FETCH TODAY'S QUESTION FROM BACKEND
   useEffect(() => {
-    fetch("http://localhost:5000/api/questions/today")
+    fetch("https://couplehub-gzl5.onrender.com/api/questions/today")
       .then((res) => res.json())
       .then((data) => {
         if (data && data.question) {
@@ -41,7 +41,7 @@ export default function Home() {
   // 👉 FETCH STATUS UPON DASHBOARD UNLOCK
   useEffect(() => {
     if (coupleId) {
-      fetch(`http://localhost:5000/api/moods/${coupleId}`)
+      fetch(`https://couplehub-gzl5.onrender.com/api/moods/${coupleId}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) {
@@ -63,7 +63,7 @@ export default function Home() {
     const checkPartnerStatus = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/auth/check-status",
+          "https://couplehub-gzl5.onrender.com/api/auth/check-status",
           {
             method: "POST",
             headers: {

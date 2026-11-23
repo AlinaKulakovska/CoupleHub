@@ -17,7 +17,7 @@ export default function DeepQuestions() {
   const partnerObj = isUser1 ? coupleData?.user2 : coupleData?.user1;
 
   // Define backend base URL
-  const API_URL = "http://localhost:5000/api/questions"; // Replace with your production server URL when deployed
+  const API_URL = "https://couplehub-gzl5.onrender.com/api/questions"; // Replace with your production server URL when deployed
 
   // Fetch today's question and past history from MongoDB
   useEffect(() => {

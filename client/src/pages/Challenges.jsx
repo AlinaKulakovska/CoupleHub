@@ -27,7 +27,7 @@ export default function CoupleChallenges() {
 
   useEffect(() => {
     if (coupleId) {
-      fetch(`http://localhost:5000/api/challenges/${coupleId}`)
+      fetch(`https://couplehub-gzl5.onrender.com/api/challenges/${coupleId}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.challenges) setChallenges(data.challenges);
@@ -40,7 +40,7 @@ export default function CoupleChallenges() {
 
   const handleComplete = async (challengeId) => {
     try {
-      const response = await fetch("http://localhost:5000/api/challenges/complete", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/challenges/complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ coupleId, challengeId }),
@@ -60,7 +60,7 @@ export default function CoupleChallenges() {
     if (!newTitle.trim() || !newDescription.trim()) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/challenges/add", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/challenges/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

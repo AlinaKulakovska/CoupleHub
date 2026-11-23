@@ -25,7 +25,7 @@ export default function ToDoList() {
 
   useEffect(() => {
     if (coupleId) {
-      fetch(`http://localhost:5000/api/tasks/${coupleId}`)
+      fetch(`https://couplehub-gzl5.onrender.com/api/tasks/${coupleId}`)
         .then((res) => res.json())
         .then((data) => setTasks(Array.isArray(data) ? data : []))
         .catch((err) => console.error(err));
@@ -37,7 +37,7 @@ export default function ToDoList() {
     if (!title.trim() || !dueDate) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/tasks/add", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/tasks/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -63,7 +63,7 @@ export default function ToDoList() {
 
   const handleToggleTask = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/toggle/${id}`, {
+      const response = await fetch(`https://couplehub-gzl5.onrender.com/api/tasks/toggle/${id}`, {
         method: "PATCH",
       });
       if (response.ok) {

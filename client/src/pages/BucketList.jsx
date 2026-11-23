@@ -22,7 +22,7 @@ export default function BucketList() {
   // Fetch items from database on component mount
   useEffect(() => {
     if (coupleId) {
-      fetch(`http://localhost:5000/api/bucket-list/${coupleId}`)
+      fetch(`https://couplehub-gzl5.onrender.com/api/bucket-list/${coupleId}`)
         .then((res) => res.json())
         .then((data) => setItems(Array.isArray(data) ? data : []))
         .catch((err) => console.error(err));
@@ -35,7 +35,7 @@ export default function BucketList() {
     if (!newDream.trim()) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/bucket-list/add", {
+      const response = await fetch("https://couplehub-gzl5.onrender.com/api/bucket-list/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -58,7 +58,7 @@ export default function BucketList() {
   // Handle checking off an item
   const handleToggleItem = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/bucket-list/toggle/${id}`, {
+      const response = await fetch(`https://couplehub-gzl5.onrender.com/api/bucket-list/toggle/${id}`, {
         method: "PATCH",
       });
       if (response.ok) {
